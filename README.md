@@ -8,11 +8,13 @@ A simple Hello World static website built with HTML and CSS.
 |-------|-----------|
 | Markup | HTML5 |
 | Styling | CSS3 |
-| Server | Python 3 (built-in `http.server`) |
+| Server | nginx (via Docker) |
 
 ## How to Run
 
-**Requirements:** Python 3 (pre-installed on most systems)
+### With Docker (Recommended)
+
+**Requirements:** Docker Desktop
 
 1. Clone the repository:
    ```bash
@@ -20,32 +22,44 @@ A simple Hello World static website built with HTML and CSS.
    cd Claude-test
    ```
 
-2. Start the local server:
+2. Build the Docker image:
    ```bash
-   python3 -m http.server 8080
+   docker build -t claude-test .
    ```
 
-3. Open your browser and go to:
+3. Run the container:
+   ```bash
+   docker run -d -p 8080:80 --name claude-test claude-test
+   ```
+
+4. Open your browser and go to:
    ```
    http://localhost:8080
    ```
+
+### Without Docker
+
+**Requirements:** Python 3 (pre-installed on most systems)
+
+```bash
+python3 -m http.server 8080
+```
+
+Then open [http://localhost:8080](http://localhost:8080).
 
 ## Where to Launch
 
 | Environment | URL |
 |-------------|-----|
-| Local | http://localhost:8080 |
-
-To use a different port, replace `8080` with any available port number:
-```bash
-python3 -m http.server 3000
-```
+| Docker | http://localhost:8080 |
+| Python server | http://localhost:8080 |
 
 ## Project Structure
 
 ```
 Claude-test/
-├── index.html   # Main page
-├── style.css    # Styles
-└── README.md    # This file
+├── index.html    # Main page
+├── style.css     # Styles
+├── Dockerfile    # Docker configuration
+└── README.md     # This file
 ```
